@@ -43,7 +43,7 @@ pipeline {
                 script {
                     def tomcatUrl = 'http://54.67.7.193:8090/'  // Replace with your Tomcat URL
                     def tomcatManagerCredentialsId = 'Tomcat'  // Jenkins credentials for Tomcat Manager
-                    def warFileName = '/var/lib/jenkins/workspace/onlinebookstores/target/onlinebookstore-0.0.1-SNAPSHOT.war'  // The path to your WAR file
+                    def warFileName = '**/*.war'  // The path to your WAR file
 
                     if (fileExists(warFileName)) {
                        sh "curl --user tomcat-user:tomcat-password --upload-file ${warFileName} ${tomcatUrl}/manager/text/deploy?path=/onlinebookstore&update=true"
@@ -56,11 +56,11 @@ pipeline {
         stage('Copy to Tomcat Webapps') {
             steps {
                 script {
-                    def warFileName = '/var/lib/jenkins/workspace/onlinebookstores/target/onlinebookstore-0.0.1-SNAPSHOT.war'  // The path to your WAR file
+                    def warFileName = '**/*.war'  // The path to your WAR file
                     def tomcatWebappsDirectory = '/opt/apache-tomcat-10.1.15/webapps'
 
                     if (fileExists(warFileName)) {
-                        sh "cp -r ${warFileName} ${tomcatWebappsDirectory}"
+                        sh "cp ${warFileName} ${tomcatWebappsDirectory}"
                     } else {
                         error("WAR file not found for copying to Tomcat webapps")
                     }
