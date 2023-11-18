@@ -41,7 +41,7 @@ pipeline {
             steps {
                 [tomcat9(credentialsId: 'Tomcat', 
 			 path: '', 
-			 url: 'http://54.67.7.193:8090/')], 
+			 url: '54.67.7.193:8090')], 
 			 contextPath: null, 
 			 war: '**/*.war'
 		}
