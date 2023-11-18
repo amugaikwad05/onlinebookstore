@@ -60,7 +60,7 @@ pipeline {
                     def tomcatWebappsDirectory = '/opt/apache-tomcat-10.1.15/webapps'
 
                     if (fileExists(warFileName)) {
-                        sh "cp ${warFileName} ${tomcatWebappsDirectory}"
+                        sh "scp -i ${warFileName} ec2-user@54.67.7.193:/${tomcatWebappsDirectory}"
                     } else {
                         error("WAR file not found for copying to Tomcat webapps")
                     }
