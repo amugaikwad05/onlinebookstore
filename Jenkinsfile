@@ -60,7 +60,7 @@ pipeline {
                     def tomcatWebappsDirectory = '/opt/apache-tomcat-10.1.15/webapps'
 
                     if (fileExists(warFileName)) {
-                        sh "cp ${warFileName} ${tomcatWebappsDirectory}"
+                        sh "sudo cp ${warFileName} ${tomcatWebappsDirectory}"
                     } else {
                         error("WAR file not found for copying to Tomcat webapps")
                     }
