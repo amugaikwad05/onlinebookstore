@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Name should match the one you configured in the Global Tool Configuration
-        maven 'Maven'
+        maven 'maven'
     }
 
     stages {
@@ -39,11 +39,11 @@ pipeline {
         }
         stage('Copy to Tomcat Webapps') {
             steps {
-                tomcat9 credentialsId: 'Tomcat'
-		path: ''
-		url: 'http://54.67.7.193:8090/'
-		contextPath: null
-		war: '**/*.war'
+                [tomcat9(credentialsId: 'Tomcat', 
+			 path: '', 
+			 url: 'http://54.67.7.193:8090/')], 
+			 contextPath: null, 
+			 war: '**/*.war'
 		}
 	}
     }
