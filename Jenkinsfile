@@ -33,7 +33,7 @@ pipeline {
             nexusUrl: '3.106.164.181:8081', 
             nexusVersion: 'nexus3', 
             protocol: 'http', 
-            repository: 'onlinebookstore', 
+            repository: 'onlinebookstores', 
             version: '0.0.1-SNAPSHOT'
     }
         }
