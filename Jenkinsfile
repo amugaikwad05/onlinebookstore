@@ -30,7 +30,7 @@ pipeline {
         ], 
             credentialsId: 'nexus', 
             groupId: 'onlinebookstore', 
-            nexusUrl: '13.52.183.90:8081', 
+            nexusUrl: '3.106.164.181:8081', 
             nexusVersion: 'nexus3', 
             protocol: 'http', 
             repository: 'onlinebookstore', 
@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Copy to Tomcat Webapps') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://54.67.7.193:8090/')], contextPath: null, war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://3.104.119.1:8090/')], contextPath: null, war: '**/*.war'
 		}
 	}
     }
