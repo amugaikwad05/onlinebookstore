@@ -1,0 +1,48 @@
+pipeline{
+    agent any
+
+       stages{
+           stage('scm'){
+               steps{
+                    scm checkout
+               }
+           }
+            stage('build'){
+                steps{
+                    sh 'mvn clean install'
+                }
+            }
+            
+            stage('nexus'){
+                steps{
+                    nexusArtifactUploader artifacts: [
+                        [
+                            artifactId: 'onlinebookstore', 
+                            classifier: '', 
+                            file: '/var/lib/jenkins/workspace/webapp/target/onlinebookstore-0.0.1-SNAPSHOT.war', 
+                            type: 'war'
+                          
+                        ]
+                    ], 
+                    credentialsId: 'Nexus', 
+                    groupId: 'onlinebookstore', 
+                    nexusUrl: '13.127.136.131:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'webapplication', version: 
+                    '0.0.1-SNAPSHOT'
+                }
+            }
+
+            stage('tomcat'){
+                 steps{
+                    deploy adapters:
+                     [
+                        tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://13.235.95.190:8090')
+                        ],
+                         contextPath: null, war: '**/*.war'
+                 }
+            }
+
+        }
+}
